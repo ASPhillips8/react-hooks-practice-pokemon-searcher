@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Form } from "semantic-ui-react"
 
-function PokemonForm() {
+function PokemonForm({ onSubmitPokemon }) {
   const [name, setName] = useState("")
   const [hp, setHp] = useState("")
   const [frontUrl, setFrontUrl] = useState("")
@@ -25,7 +25,7 @@ function PokemonForm() {
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
-      .then((newPokemonData) => console.log(newPokemonData))
+      .then((newPokemonData) => onSubmitPokemon(newPokemonData))
       .catch((error) => console.error("Fetch error:", error))
   }
 

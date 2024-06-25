@@ -22,11 +22,15 @@ function PokemonPage() {
     setSearchInput(search)
   }
 
+  function handlePokemonSubmit(newPokemon) {
+    setPokemons([...pokemons, newPokemon])
+  }
+
   return (
     <Container>
       <h1>Pokemon Searcher</h1>
       <br />
-      <PokemonForm />
+      <PokemonForm onSubmitPokemon={handlePokemonSubmit} />
       <br />
       <Search onSearch={handlePokemonSearch} />
       <br />
