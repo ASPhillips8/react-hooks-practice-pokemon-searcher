@@ -17,7 +17,16 @@ function PokemonForm() {
         back: backUrl,
       },
     }
-    console.log(formData)
+    fetch("http://localhost:3001/pokemon", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((newPokemonData) => console.log(newPokemonData))
+      .catch((error) => console.error("Fetch error:", error))
   }
 
   return (
