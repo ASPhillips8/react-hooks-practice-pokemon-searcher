@@ -1,5 +1,5 @@
-import React from "react";
-import { Form } from "semantic-ui-react";
+import React, { useState } from "react"
+import { Form } from "semantic-ui-react"
 
 function PokemonForm() {
   return (
@@ -7,7 +7,7 @@ function PokemonForm() {
       <h3>Add a Pokemon!</h3>
       <Form
         onSubmit={() => {
-          console.log("submitting form...");
+          console.log("submitting form...")
         }}
       >
         <Form.Group widths="equal">
@@ -29,7 +29,7 @@ function PokemonForm() {
         <Form.Button>Submit</Form.Button>
       </Form>
     </div>
-  );
+  )
 }
 
-export default PokemonForm;
+export default PokemonForm
