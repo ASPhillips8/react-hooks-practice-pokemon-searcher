@@ -2,19 +2,26 @@ import React, { useState } from "react"
 import { Form } from "semantic-ui-react"
 
 function PokemonForm({ onSubmitPokemon }) {
-  const [name, setName] = useState("")
-  const [hp, setHp] = useState("")
-  const [frontUrl, setFrontUrl] = useState("")
-  const [backUrl, setBackUrl] = useState("")
+  const [formData, setFormData] = useState({
+    name: "",
+    hp: "",
+    frontUrl: "",
+    backUrl: "",
+  })
+
+  function handleFormChange(event) {
+    const { name, value } = event.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   function handleFormSubmit(event) {
     event.preventDefault()
-    const formData = {
-      name: name,
-      hp: hp,
+    const newPokemon = {
+      name: formData.name,
+      hp: formData.hp,
       sprites: {
-        front: frontUrl,
-        back: backUrl,
+        front: formData.frontUrl,
+        back: formData.backUrl,
       },
     }
     fetch("http://localhost:3001/pokemon", {
@@ -22,7 +29,7 @@ function PokemonForm({ onSubmitPokemon }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(newPokemon),
     })
       .then((response) => response.json())
       .then((newPokemonData) => onSubmitPokemon(newPokemonData))
@@ -39,28 +46,28 @@ function PokemonForm({ onSubmitPokemon }) {
             label="Name"
             placeholder="Name"
             name="name"
-            onChange={(event) => setName(event.target.value)}
+            onChange={handleFormChange}
           />
           <Form.Input
             fluid
             label="hp"
             placeholder="hp"
             name="hp"
-            onChange={(event) => setHp(event.target.value)}
+            onChange={handleFormChange}
           />
           <Form.Input
             fluid
             label="Front Image URL"
             placeholder="url"
             name="frontUrl"
-            onChange={(event) => setFrontUrl(event.target.value)}
+            onChange={handleFormChange}
           />
           <Form.Input
             fluid
             label="Back Image URL"
             placeholder="url"
             name="backUrl"
-            onChange={(event) => setBackUrl(event.target.value)}
+            onChange={handleFormChange}
           />
         </Form.Group>
         <Form.Button>Submit</Form.Button>
